@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Position Monitoring</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="w-[100vw] fons-sans" style="background: url('galaxy_gif.gif')">
+    <h1 class="p-5 text-white font-bold">Satellite Detail Position Monitoring</h1>
+
+    <div class="px-5 flex border-b border-black pb-2">
+
+        <div>
+            <h6 class="text-white font-bold text-[15px] mb-5">User Info</h6>
+
+            <div class="bg-green-500 max-w-[300px] p-2 ">
+                <h6 class="text-[12px] mb-2 bg-green-600 p-4 font-[800] text-white">These information is captured everytime once you access it to check the satellite information for pinging</h6>
+                <h6 class="text-[13px] ">IP Address : <span class="font-bold"> <%= user_location.ip %> </span></h6>
+                <h6 class="text-[13px] ">Host Name : <span class="font-bold"> <%= user_location.hostname %> </span></h6>
+                <h6 class="text-[13px] ">Latitude : <span class="font-bold"> <%= user_location.latitude %> </span></h6>
+                <h6 class="text-[13px] ">Longitude : <span class="font-bold"> <%= user_location.longitude %> </span></h6>
+                <h6 class="text-[13px] ">Altitude : <span class="font-bold"> <%= user_location.altitude %> </span></h6>
+                <h6 class="text-[13px] ">City / Postal / Region : <span class="font-bold"> <%= user_location.city %> / <%= user_location.postal %> / <%= user_location.region %> </span></h6>
+                <h6 class="text-[13px] ">Country / Timezone  : <span class="font-bold"> <%= user_location.country %> / <%= user_location.timezone %> </span></h6>
+                <h6 class="text-[13px] ">Org  : <span class="font-bold"> <%= user_location.org %> </span></h6>
+            </div> 
+        </div>
+
+        <div class="mx-5">
+            <h6 class="text-white font-bold text-[15px] mb-5">Satellite Info</h6>
+
+            <div class="bg-green-500 p-4">
+            <h6 class="text-[13px] ">Satellite Name : <span id="satellite_name" class="font-bold"> <%= info.satname %>  </span></h6>
+            <h6 class="text-[13px] ">Satellite Id : <span id="satellite_id" class="font-bold"> <%= info.satid %>  </span></h6>
+            </div>
+        </div>
+
+        <div >
+            <h6 class="text-white font-bold text-[15px] mb-5">Latest Record</h6>
+
+            <div class="bg-green-500 p-4">
+            <h6 class="text-[13px] ">Satellite Latitude : <span class="font-bold" id="satellite_lat"> <%= positions.satlatitude %> </span></h6>
+            <h6 class="text-[13px] ">Satellite Longitude : <span class="font-bold" id="satellite_lon" > <%= positions.satlongitude %> </span></h6>
+            <h6 class="text-[13px] ">Satellite Altitude : <span class="font-bold" id="satellite_alt"> <%= positions.sataltitude %> </span></h6>
+            <h6 class="text-[13px] ">Elevation : <span class="font-bold" id="satellite_ele"> <%= positions.elevation %> </span></h6>
+            <h6 class="text-[13px] ">RA : <span class="font-bold" id="satellite_ra"> <%= positions.ra %> </span></h6>
+            <h6 class="text-[13px] ">Eclipsed : <span class="font-bold" id="satellite_ecl" > <%= positions.eclipsed %> </span></h6>
+            <h6 class="text-[13px] ">Recent Data : 
+                <a href="/satellite_position_detail" target="_blank">
+                <span class="font-bold text-blue-500 underline" >Check Latest Data </span>
+                </a>
+            </h6>
+            </div>
+        </div>
+    </div>
+  
+
+    
+   
+</body>
+</html>

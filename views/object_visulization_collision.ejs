@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Satellite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="w-[100vw] px-4 py-4 fons-sans bg-black text-white">
+
+        <div class="flex items-center border-b  border-[#696969]">
+            <a href="/satellites_object_visualization_analysis"><h6 class="text-[12px] px-2 cursor-pointer p-1 text-white font-bold">Satellite List</h6></a>
+            <a href="/related_satellites_list"><h6 class="text-[12px] px-2 cursor-pointer p-1  text-white font-bold">Relational List</h6></a>
+            <a href="/collision_satellites_list"><h6 class="text-[12px] px-2 cursor-pointer p-1 bg-green-400 text-black   font-bold">Collision List</h6></a>
+        </div>
+    
+        <div class="flex items-center justify-between mt-2">
+        <h6 class="text-[14px] font-bold">Collison Satellite</h6>
+
+        </div>
+
+        <table id="dataTable" class="w-[100%] mt-2">
+            <thead class="w-[95vh] overflow-x-scroll text-white text-[13px] border">
+                <tr class="">
+                    <th class="border-r p-2">Priority</th>
+                    <th class="border-r p-2">Distance Diff</th>
+                    <th class="border-r p-2">Sat 1</th>
+                    <th class="border-r p-2">Sat 1 Position</th>
+                    <th class="border-r p-2">Sat 1 Orbital Element</th>
+                    <th class="border-r p-2">Sat 2</th>
+                    <th class="border-r p-2">Sat 2 Position</th>
+                    <th class="border-r p-2">Sat 2 Orbital Element</th>
+                    <th class="p-2">Timestamp</th>
+                </tr>
+            </thead> 
+            <tbody id="dataBody" class="text-white text-[13px] border">
+                
+
+            </tbody>
+
+        </table>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+
+
+            function appendDataToTable(data) {
+            const tableBody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+            
+            // Create a new row
+            const newRow = tableBody.insertRow();
+            
+            // Insert cells into the row
+            const Cell0 = newRow.insertCell(0);
+            const Cell1 = newRow.insertCell(1);
+            const Cell2 = newRow.insertCell(2);
+            const Cell3 = newRow.insertCell(3);
+            const Cell4 = newRow.insertCell(4);
+            const Cell5 = newRow.insertCell(5);
+            const Cell6 = newRow.insertCell(6);
+            const Cell7 = newRow.insertCell(7);
+            const Cell8 = newRow.insertCell(8);
+            
+            
+            // Populate cells with data
+            Cell0.textContent = data.selectedPriority;
+            Cell1.textContent = data.distance;
+            Cell2.textContent = data.satellite1.name;
+            Cell3.textContent = JSON.stringify(data.satellite1.position);
+            Cell4.textContent = JSON.stringify(data.satellite1.orbital_elements);
+            Cell5.textContent = data.satellite2.name;
+            Cell6.textContent = JSON.stringify(data.satellite2.position);
+            Cell7.textContent = JSON.stringify(data.satellite2.orbital_elements);
+            Cell8.textContent = data.createdAt;
+
+            Cell0.style.borderRight = '1px solid white'  
+            Cell1.style.borderRight = '1px solid white'  
+            Cell2.style.borderRight = '1px solid white'  
+            Cell3.style.borderRight = '1px solid white'  
+            Cell4.style.borderRight = '1px solid white'  
+            Cell5.style.borderRight = '1px solid white'  
+            Cell6.style.borderRight = '1px solid white'  
+            Cell7.style.borderRight = '1px solid white'  
+            Cell8.style.borderRight = '1px solid white'
+            
+            Cell0.style.width = '150px'  
+            Cell1.style.width = '150px'  
+            Cell2.style.width = '150px'  
+            Cell3.style.width = '150px'  
+            Cell4.style.width = '150px'  
+            Cell5.style.width = '150px'  
+            Cell6.style.width = '150px'  
+            Cell7.style.width = '150px'  
+            Cell8.style.width = '150px'
+            newRow.style.borderBottom = '1px solid white'  
+            }
+
+           
+
+            const socket = io();
+
+            socket.emit('satellite_collision_connection', '');
+
+            socket.on('satellite_collision', function(data) {
+                if (data.selectedPriority === 'High'){
+                    alert("Satellite COllision occuring whith high priority")
+                }
+                appendDataToTable(data)
+            })   
+            console.log("hello",)
+        </script>
+     
+       
+</body>
+</html>

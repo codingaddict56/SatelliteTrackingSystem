@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Satellite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="w-[100vw] px-4 py-4 fons-sans bg-black text-white">
+    
+    <div class="flex items-center border-b  border-[#696969]">
+        <a href="/satellites_object_visualization_analysis"><h6 class="text-[12px] px-2 cursor-pointer p-1 text-white font-bold">Satellite List</h6></a>
+        <a href="/related_satellites_list"><h6 class="text-[12px] px-2 cursor-pointer p-1  bg-green-400 text-black font-bold">Relational List</h6></a>
+        <a href="/collision_satellites_list"><h6 class="text-[12px] px-2 cursor-pointer p-1   font-bold">Collision List</h6></a>
+    </div>
+
+    <div class="flex items-center justify-between mt-2">
+    <h6 class="text-[14px] font-bold">Relational Satellite (<%= response.length %>)</h6>
+
+    </div>
+    <div class="grid grid-cols-1 gap-2 mt-4">
+        <% response.forEach( function (r) { %>
+        <div class="flex">
+        <div class="border w-[20%] border-[#696969] p-2">
+            <h6 class="text-[12px] font-bold text-green-400">Satellite Name : <%= r._id.name %></h6>
+            <h6 class="text-[12px] font-bold opacity-80">Type : <%= r._id.type %></h6>
+            <h6 class="text-[12px] font-bold opacity-80">Norad Id : <%= r._id.norad_id %>  / Orbit Type : <%= r._id.orbit_type %></h6>
+            <h6 class="text-[12px] font-bold opacity-80">Internation Designator : <%= r._id.international_designator %> / Launch Date : <%= r._id.launch_date %></h6>
+            <div class="border border-[#696969] mt-2">
+                <div class="border-b border-[#696969] flex text-[11px]">
+                    <h6 class="border-r border-[#696969] w-[50%] p-1">Semi Major Axis in KM</h6>
+                    <h6 class="p-1"><%= r._id.orbital_elements.semi_major_axis_km %></h6>
+                </div>
+                <div class="border-b border-[#696969] flex text-[11px]">
+                    <h6 class="border-r border-[#696969] w-[50%] p-1">Eccentricity</h6>
+                    <h6 class="p-1"><%= r._id.orbital_elements.eccentricity %></h6>
+                </div>
+                <div class="border-b border-[#696969] flex text-[11px]">
+                    <h6 class="border-r border-[#696969] w-[50%] p-1">Inclination Deg</h6>
+                    <h6 class="p-1"><%= r._id.orbital_elements.inclination_deg %></h6>
+                </div>
+                <div class="border-b border-[#696969] flex text-[11px]">
+                    <h6 class="border-r border-[#696969] w-[50%] p-1">Argument of periapsis Deg</h6>
+                    <h6 class="p-1"><%= r._id.orbital_elements.argument_of_periapsis_deg %></h6>
+                </div>
+                <div class="border-b border-[#696969] flex text-[11px]">
+                    <h6 class="border-r border-[#696969] w-[50%] p-1">Longitude of ascending node Deg</h6>
+                    <h6 class="p-1"><%= r._id.orbital_elements.longitude_of_ascending_node_deg %></h6>
+                </div>
+                <div class="flex text-[11px]">
+                    <h6 class="border-r border-[#696969] w-[50%] p-1">Mean Anomaly Deg</h6>
+                    <h6 class="p-1"><%= r._id.orbital_elements.mean_anomaly_deg %></h6>
+                </div>
+
+            </div> 
+
+          
+        </div>
+        <div class="border ml-2 w-[80%] border-[#696969] p-2">
+            <h6 class="text-[12px] border-b pb-1 border-[#696969] font-bold text-green-400">Near by Satellite / Object Info</h6>
+            <div class="grid grid-cols-4 mt-1">
+                <% r.relational_satellite.forEach( function (r1) { %>
+                <div class="border  border-[#696969] p-2">
+                    <h6 class="text-[12px] font-bold text-green-400">Satellite Name : <%= r1.name %></h6>
+                    <h6 class="text-[12px] font-bold opacity-80">Type : <%= r1.type %></h6>
+                    <h6 class="text-[12px] font-bold opacity-80">Norad Id : <%= r1.norad_id %>  / Orbit Type : <%= r1.orbit_type %></h6>
+                    <h6 class="text-[12px] font-bold opacity-80">Internation Designator : <%= r1.international_designator %> / Launch Date : <%= r1.launch_date %></h6>
+                    <div class="border border-[#696969] mt-2">
+                        <div class="border-b border-[#696969] flex text-[11px]">
+                            <h6 class="border-r border-[#696969] w-[50%] p-1">Semi Major Axis in KM</h6>
+                            <h6 class="p-1"><%= r1.orbital_elements.semi_major_axis_km %></h6>
+                        </div>
+                        <div class="border-b border-[#696969] flex text-[11px]">
+                            <h6 class="border-r border-[#696969] w-[50%] p-1">Eccentricity</h6>
+                            <h6 class="p-1"><%= r1.orbital_elements.eccentricity %></h6>
+                        </div>
+                        <div class="border-b border-[#696969] flex text-[11px]">
+                            <h6 class="border-r border-[#696969] w-[50%] p-1">Inclination Deg</h6>
+                            <h6 class="p-1"><%= r1.orbital_elements.inclination_deg %></h6>
+                        </div>
+                        <div class="border-b border-[#696969] flex text-[11px]">
+                            <h6 class="border-r border-[#696969] w-[50%] p-1">Argument of periapsis Deg</h6>
+                            <h6 class="p-1"><%= r1.orbital_elements.argument_of_periapsis_deg %></h6>
+                        </div>
+                        <div class="border-b border-[#696969] flex text-[11px]">
+                            <h6 class="border-r border-[#696969] w-[50%] p-1">Longitude of ascending node Deg</h6>
+                            <h6 class="p-1"><%= r1.orbital_elements.longitude_of_ascending_node_deg %></h6>
+                        </div>
+                        <div class="flex text-[11px]">
+                            <h6 class="border-r border-[#696969] w-[50%] p-1">Mean Anomaly Deg</h6>
+                            <h6 class="p-1"><%= r1.orbital_elements.mean_anomaly_deg %></h6>
+                        </div>
+        
+                    </div> 
+        
+                  
+                </div>
+                <% }) %>
+            </div>
+        </div>
+      </div>    
+        <% }) %>
+    </div>
+    <script>
+
+        window.addEventListener('popstate', function(event) {
+            // Reload the page when the user navigates back
+            location.reload();
+        });
+
+        window.onpageshow = function(event) {
+        if (event.persisted) {
+            // Page navigation was via the back/forward buttons
+            // Reload the page
+            location.reload();
+        }else{
+            console.log("loading 1")
+            
+
+        }
+        };
+
+        async function updateData(v){
+            window.location.href = "/update/" + v
+        }
+
+        async function deleteData(v){
+            fetch("http://localhost:3000/satellites/"+v, {
+                method: "DELETE",
+                body: null,
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+                }).then((response)=> {
+                    if(response.status == 200){
+                        location.reload();
+                        alert("Data added successfully!")
+                        
+                    }  
+                }).catch((error)=>{
+
+                })
+            
+        }
+
+    </script>
+</body>
+</html>

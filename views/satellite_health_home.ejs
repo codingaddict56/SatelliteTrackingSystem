@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Monitoring</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="w-[100vw] fons-sans bg-black" >
+    
+    <div class="flex pr-10 items-center justify-between">
+        <h1 class="p-5 text-white font-bold">Health Monitoring</h1>
+        <input type="text" onkeydown="handleKeyDown(event)" placeholder="search satellite" class="text-black pl-2 rounded-[5px]" id="searchField" />
+        </div>
+
+
+    <div class="mx-5 mt-5 w-[95vw] overflow-x-scroll pb-10">
+        <table id="dataTable w-[100%] table-fixed">
+            <thead class="w-[100%]  text-white text-[13px] border table-fixed">
+                <tr class="w-[100%]">
+                    <th class="border-r p-2">Sat Id</th>
+                    <th class="border-r p-2">Sat Name</th>
+                    <th class="border-r p-2">Launched Date</th>
+                    <th class="border-r p-2">Orbit</th>
+                    <th class="border-r p-2">Status</th>
+                    <th class="border-r p-2">Sensor Info</th>
+                    <th class="border-r p-2">Warning Info</th>
+                    <th class="p-2">Timestamp</th>
+                </tr>
+            </thead> 
+             <tbody id="dataBody" class="w-[100%] text-white text-[13px] border table-fixed">
+
+             </tbody>
+        </table>
+
+    </div>
+
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+            
+            const socket = io();
+
+           socket.emit('satellite_health_update_connection', '');
+           
+           socket.on('satellite_health_update', function(data) {
+           console.log("im in reciever",data)
+
+           const newRow = document.createElement('tr');
+
+            const column1Cell = document.createElement('td');
+            column1Cell.textContent = data.info.satid;
+            column1Cell.style.padding = '10px'
+            column1Cell.style.borderRight = '1px solid white'
+            newRow.appendChild(column1Cell);
+
+            const column2Cell = document.createElement('td');
+            column2Cell.style.padding = '10px'
+            column2Cell.style.borderRight = '1px solid white'
+            column2Cell.textContent = data.info.satname;
+            newRow.appendChild(column2Cell);
+            
+            const column3Cell = document.createElement('td');
+            column3Cell.style.padding = '10px'
+            column3Cell.style.borderRight = '1px solid white'
+            column3Cell.textContent = data.info.launch_date;
+            newRow.appendChild(column3Cell);
+
+            const column4Cell = document.createElement('td');
+            column4Cell.style.padding = '10px'
+            column4Cell.style.borderRight = '1px solid white'
+            column4Cell.textContent = data.info.orbit_type;
+            newRow.appendChild(column4Cell);
+
+            const column5Cell = document.createElement('td');
+            column5Cell.style.padding = '10px'
+            column5Cell.style.borderRight = '1px solid white'
+            column5Cell.textContent = data.info.status;
+            newRow.appendChild(column5Cell);
+
+            const column6Cell = document.createElement('td');
+            column6Cell.style.padding = '10px'
+            column6Cell.style.borderRight = '1px solid white'
+            column6Cell.textContent = JSON.stringify(data.sensor_info);
+            newRow.appendChild(column6Cell);
+
+            const column7Cell = document.createElement('td');
+            column7Cell.style.padding = '10px'
+            column7Cell.style.borderRight = '1px solid white'
+            column7Cell.textContent = JSON.stringify(data.warn_info);;
+            newRow.appendChild(column7Cell);
+
+           
+            const column9Cell = document.createElement('td');
+            column9Cell.style.padding = '10px'
+            column9Cell.style.borderRight = '1px solid white'
+            column9Cell.textContent = data.updatedAt;
+            newRow.appendChild(column9Cell);
+
+            newRow.style.borderBottom = '1px solid white'
+            document.getElementById('dataBody').appendChild(newRow);
+            if(data.warn_info.filter((f)=>f.warn_stage === 'High').length > 0){
+             alert(`satellite id : ${data.info.satid}` + 
+            '\n' +  `satellite name : ${data.info.satname}` + '\n' + `Info : ${data.warn_info.filter((f)=>f.warn_stage === 'High')[0].value}`)
+            } 
+
+
+    
+            window.scrollTo(0, document.body.scrollHeight);
+
+            });
+
+            function handleKeyDown(event) {
+                if (event.keyCode === 13) {
+                // Execute your JavaScript function here
+                searchData();
+                }
+            }
+            async function searchData(){
+                var search = document.getElementById('searchField').value;
+                window.location.href = "/satellites_health_search/" + search
+            }
+
+    </script>  
+</body>
+</html>

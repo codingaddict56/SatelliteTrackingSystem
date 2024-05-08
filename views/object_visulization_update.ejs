@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Satellite / Object</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="w-[100vw] px-4 py-4 fons-sans bg-black text-white">
+    
+    <div class="flex items-center justify-between">
+    <h6 class="text-[14px] font-bold">Create - Edit Satellite / Object</h6>
+
+    </div>
+    <form id="myForm">
+    <h6 class="text-[11px] opacity-70 mt-2">Satellite Name</h6>
+    <input value='<%= response._id %>' opacity-70 mt-2 type="text" class="mt-2 text-[12px] p-2 w-[20%] text-black hidden" id="satellite_id" />
+
+    <input value='<%= response.name %>' type="text" class="mt-2 text-[12px] p-2 w-[20%] text-black" id="satellite_name" />
+
+    <h6 class="text-[11px] opacity-70 mt-2">Type</h6>
+    <select class="h-[34px] text-black border w-[200px]" id="type">
+        <option value="satellite" selected='<%= response.name %> == satellite'>Satellite</option>
+        <option value="object" selected='<%= response.name %> == object'>Object</option>
+    </select>
+
+    <h6 class="text-[11px] opacity-70 mt-2">Near By Satellite / Object</h6>
+    <select class="w-[20%] text-black px-1 py-2" id="relational_satellite">
+        <% response1.forEach( function (r) { %>
+          <option class="text-black" value="<%= r._id %>" selected="response1.find(r._id === '<%= r._id %>')"><%= r.name %></option>
+        <% }) %>
+      </select>
+
+    <h6 class="text-[11px] opacity-70 mt-2">NORAD ID</h6>
+    <input value='<%= response.norad_id %>' type="text" class="mt-2 text-[12px] p-2 w-[20%] text-black" id="norad_id" />
+
+    <h6 class="text-[11px] opacity-70 mt-2">Orbit Type</h6>
+    <input value='<%= response.orbit_type %>' type="text" class="mt-2 text-[12px] p-2 w-[20%] text-black" id="orbit_type" />
+
+    <h6 class="text-[11px] opacity-70 mt-2">Internation Designator</h6>
+    <input value='<%= response.international_designator %>' type="text" class="mt-2 text-[12px] p-2 w-[20%] text-black" id="international_designator" />
+
+    <h6 class="text-[11px] opacity-70 mt-2">Launch Date</h6>
+    <input value='<%= response.launch_date %>' type="date" class="mt-2 text-[12px] p-2 w-[20%] text-black" id="launch_date" />
+
+    <div class="border-t border-b py-2 my-2">      
+        <h6 class="text-[11px] opacity-70">Position</h6>
+    
+        <div class="flex items-center">
+            <div class="mr-2">
+                <h6 class="text-[11px] opacity-70 mt-2">X</h6>
+                <input value='<%= response.position.x %>' type="number" class="mt-2 text-[12px] p-2 text-black" id="x" />
+            </div>
+            <div class="mr-2">
+                <h6 class="text-[11px] opacity-70 mt-2">Y</h6>
+                <input value='<%= response.position.y %>' type="number" class="mt-2 text-[12px] p-2 text-black" id="y" />
+            </div>
+            <div class="mr-2">
+                <h6 class="text-[11px] opacity-70 mt-2">Z</h6>
+                <input value='<%= response.position.z %>' type="number" class="mt-2 text-[12px] p-2 text-black" id="z" />
+            </div>
+        </div>
+            
+    </div>
+
+    <div class="border-t border-b py-2 my-2">      
+        <h6 class="text-[11px] opacity-70">Orbital Elements</h6>
+
+        <div class="flex items-center">
+            <div class="mr-2">
+                <h6 class="text-[11px] opacity-70 mt-2">Semi Major Axis KM</h6>
+                <input value='<%= response.orbital_elements.semi_major_axis_km %>' type="number" class="mt-2 text-[12px] p-2 text-black" id="semi_major_axis_km" />
+            </div>
+            <div class="mr-2">
+                <h6 class="text-[11px] opacity-70 mt-2">Eccentricity</h6>
+                <input value='<%= response.orbital_elements.eccentricity %>' type="number" class="mt-2 text-[12px] p-2 text-black" id="eccentricity" />
+            </div>
+            <div class="mr-2">
+                <h6 class="text-[11px] opacity-70 mt-2">Inclination Deg</h6>
+                <input value='<%= response.orbital_elements.inclination_deg %>' type="number" class="mt-2 text-[12px] p-2 text-black" id="inclination_deg" />
+            </div>
+            <div class="mr-2">
+                <h6 class="text-[11px] opacity-70 mt-2">Argument of Periapsis Deg</h6>
+                <input value='<%= response.orbital_elements.argument_of_periapsis_deg %>' type="number" class="mt-2 text-[12px] p-2 text-black" id="argument_of_periapsis_deg" />
+            </div>
+            <div class="mr-2">
+                <h6 class="text-[11px] opacity-70 mt-2">Longitude of Ascending Node Deg</h6>
+                <input value='<%= response.orbital_elements.longitude_of_ascending_node_deg %>' type="number" class="mt-2 text-[12px] p-2 text-black" id="longitude_of_ascending_node_deg" />
+            </div>
+            <div class="mr-2">
+                <h6 class="text-[11px] opacity-70 mt-2">Mean Anomaly Deg</h6>
+                <input value='<%= response.orbital_elements.mean_anomaly_deg %>' type="number" class="mt-2 text-[12px] p-2 text-black" id="mean_anomaly_deg" />
+            </div>
+            <div class="mr-2">
+                <h6 class="text-[11px] opacity-70 mt-2">Moment Enabled</h6>
+                <input type="checkbox" id="moment_enabled" <%= response.moment_enabled ? 'checked' : '' %> value="moment_enabled" name="moment_enabled" >
+            </div>
+        </div>
+    </div>   
+
+
+    <div>
+    <button type="submit" class="bg-green-400 text-[12px] font-bold py-1 text-black px-4 rounded-[4px]">Save</button>
+
+    </div>
+
+    <h6 id="response" class="text-green-400 text-[12px] font-bold py-1"></h6>
+    </form>
+
+
+    <script>
+
+        var form = document.getElementById('myForm');
+
+        form.addEventListener("submit",  async function(event) {
+            // console.log("response",response?._id)
+            event.preventDefault()
+            var satellite_id = document.getElementById('satellite_id').value;
+            var type = document.getElementById('type').value;
+            var relational_satellite = document.getElementById('relational_satellite').value;
+            var moment_enabled = document.getElementById('moment_enabled').checked;
+
+            console.log("moment_enabled",moment_enabled)
+
+            var satellite_name = document.getElementById('satellite_name').value;
+            var norad_id = document.getElementById('norad_id').value;
+            var orbit_type = document.getElementById('orbit_type').value;
+            var international_designator = document.getElementById('international_designator').value;
+            var launch_date = document.getElementById('launch_date').value;
+            var x = document.getElementById('x').value;
+            var y = document.getElementById('y').value;
+            var z = document.getElementById('z').value;
+            var semi_major_axis_km = document.getElementById('semi_major_axis_km').value;
+            var eccentricity = document.getElementById('eccentricity').value;
+            var inclination_deg = document.getElementById('inclination_deg').value;
+            var argument_of_periapsis_deg = document.getElementById('argument_of_periapsis_deg').value;
+            var longitude_of_ascending_node_deg = document.getElementById('longitude_of_ascending_node_deg').value;
+            var mean_anomaly_deg = document.getElementById('mean_anomaly_deg').value;
+            var response_reciever = document.getElementById('response');
+
+        
+            let data =   {
+                "name":satellite_name,
+                "type":type,
+                "relational_satellite":[relational_satellite],
+                "norad_id":norad_id,
+                "orbit_type":orbit_type,
+                "international_designator":international_designator,
+                "launch_date":launch_date,
+                "moment_enabled":moment_enabled,
+                "position":{
+                    x:x,
+                    y:y,
+                    z:z,
+                },
+                "orbital_elements":{ 
+                    "semi_major_axis_km": semi_major_axis_km,
+                    "eccentricity": eccentricity,
+                    "inclination_deg": inclination_deg, 
+                    "argument_of_periapsis_deg":argument_of_periapsis_deg,
+                    "longitude_of_ascending_node_deg":longitude_of_ascending_node_deg,
+                    "mean_anomaly_deg":mean_anomaly_deg
+                    }
+            }
+
+
+
+            fetch("http://localhost:3000/satellites/" + satellite_id, {
+                method: "PUT",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+                }).then((response)=> {
+                    if(response.status == 200){
+                        response_reciever.textContent = "Data updated successfully!"
+                        // document.getElementById('satellite_name').value = ''
+                        // document.getElementById('norad_id').value = ''
+                        // document.getElementById('orbit_type').value = ''
+                        // document.getElementById('international_designator').value = ''
+                        // document.getElementById('launch_date').value = ''
+                        // document.getElementById('semi_major_axis_km').value = ''
+                        // document.getElementById('eccentricity').value = ''
+                        // document.getElementById('inclination_deg').value = ''
+                        // document.getElementById('argument_of_periapsis_deg').value = ''
+                        // document.getElementById('longitude_of_ascending_node_deg').value = ''
+                        // document.getElementById('mean_anomaly_deg').value = ''
+                        setTimeout(() => {
+                            response_reciever.textContent = ''
+                            window.location.href = "/"
+                        }, 2000);
+                    }  
+                }).catch((error)=>{
+
+                })
+          
+            })       
+
+   
+
+    </script>
+
+
+</body>
+</html>
