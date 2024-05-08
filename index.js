@@ -23,14 +23,8 @@ app.use(cors());
 
 require('./crons')
 
-const client = redis.createClient();
 const io = socketIo(server);
 
-client.on('error', (err) => {
-    console.error('Error', err);
-});
-
-connectDB()
 
 
 app.set('view engine', 'ejs');
@@ -38,11 +32,14 @@ app.set('view engine', 'ejs');
 let map_base_url = 'https://maps.googleapis.com/maps/api/elevation/json'
 
 const redisClient = redis.createClient(6379,'127.0.0.1')
+
 redisClient.connect()
+connectDB()
 
 redisClient.on('connect',(err)=>{
     console.log("Redis Database Connected")
 })
+
 
 let locationData = {}
 
@@ -180,8 +177,7 @@ async function getCurrentPosition() {
             },
             user_location:{
                 ...locationData
-            },
-            key:key
+            }
         }
 
 

@@ -100,6 +100,7 @@
 
             newRow.style.borderBottom = '1px solid white'
             document.getElementById('dataBody').appendChild(newRow);
+            
             if(data.warn_info.filter((f)=>f.warn_stage === 'High').length > 0){
              alert(`satellite id : ${data.info.satid}` + 
             '\n' +  `satellite name : ${data.info.satname}` + '\n' + `Info : ${data.warn_info.filter((f)=>f.warn_stage === 'High')[0].value}`)
