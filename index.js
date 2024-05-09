@@ -45,7 +45,7 @@ let locationData = {}
 
 let noradId = '59585'
 let noradId1 = '25544'
-let apiKey = 'C9CDRX-SGVLBS-E8CU5R-5912'
+let apiKey = 'QKG5P9-4CRWSH-EXCMYM-5951'
 
 async function getTwoSatelliteInfo(){
     try {
@@ -474,7 +474,7 @@ function calculateDistance(point1, point2) {
                         }        
                     }
                 })
-                }, 15000);
+                }, 10000);
         })   
     
         

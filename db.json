@@ -132,7 +132,7 @@
                     "satellite_id": "SAT003",
                     "timestamps": "2024-05-05T08:00:00",
                     "warn_stage": "High",
-                    "value": "BATTERY fsyfshgdjhfkhf CRITICAL LEVEL"
+                    "value": "BATTERY CRITICAL LEVEL"
                 }
             ]
         }
