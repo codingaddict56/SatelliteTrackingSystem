@@ -37,7 +37,7 @@ redisClient.connect()
 connectDB()
 
 redisClient.on('connect',(err)=>{
-    console.log("Redis Database Connected")
+    console.log("Redis Database Connected!!!!")
 })
 
 
